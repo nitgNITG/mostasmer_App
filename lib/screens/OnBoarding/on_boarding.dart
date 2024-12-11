@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mostasmer/screens/LanguageScreen/language_screen.dart';
 import 'package:mostasmer/screens/LoginScreen/login_screen.dart';
 
 import '../../widgets/App_Button.dart';
@@ -11,51 +12,74 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LanguageSelectionPage()));
             },
-            child: Text(
+            child: const Text(
               "Skip",
-              style: TextStyle(color: Colors.blue, fontSize: 16),
+              style: TextStyle(color: Colors.black, fontSize: 16),
             ),
           ),
         ],
       ),
-      body: PageView(
-        controller: _pageController,
+      body: Column(
         children: [
-          buildOnboardingPage(
-            image: "assets/image1.png",
-            title: "Welcome to App",
-            description: "Discover new features to simplify your life.",
-            buttonText: "Next",
-            onPressed: () => _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.ease),
+          // SizedBox(height: 100,),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPage = index;
+                });
+                // if (index == 2) { // Assuming the last page is index 2
+                //   Future.delayed(Duration(milliseconds: 500), () {
+                //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                //   });
+                // }
+              },
+              children: [
+                buildOnboardingPage(
+                  image: "assets/onboarding.png",
+                  title: "Earn Points with\n Every Purchase",
+                  description: "Welcome to Mostasmer! Earn\n points with every purchase and \nuse them to shop again for free!",
+                  buttonText: "Next",
+                  onPressed: () => _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease),
+                ),
+                buildOnboardingPage(
+                  image: "assets/onboarding.png",
+                  title: "Redeem Points on Your \nNext Order",
+                  description: "Join Mostasmer today—where \nevery purchase earns you points\n to spend on your next order.",
+                  buttonText: "Next",
+                  onPressed: () => _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease),
+                ),
+                buildOnboardingPage(
+                  image: "assets/onboarding.png",
+                  title: "Shop, Earn, and Redeem!",
+                  description: "Shop, earn, and redeem! With\n Mostasmer, your points are your\n key to even more shopping.",
+                  buttonText: "Next",
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LanguageSelectionPage()));
+                  },
+                ),
+
+              ],
+            ),
+
           ),
-          buildOnboardingPage(
-            image: "assets/image2.png",
-            title: "Stay Organized",
-            description: "Keep track of your tasks and projects effortlessly.",
-            buttonText: "Next",
-            onPressed: () => _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.ease),
-          ),
-          buildOnboardingPage(
-            image: "assets/image3.png",
-            title: "Get Started",
-            description: "Let’s get started and make the most of this app!",
-            buttonText: "Get Started",
-            onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-            },
-          ),
+
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -71,28 +95,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(image, height: 250),
-        SizedBox(height: 20),
+        Image.asset(image,width: 120,height: 190,),
+        const SizedBox(height: 20),
         Text(
           title,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           description,
-          style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+          style: const TextStyle(fontSize: 20, color: Colors.black),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         CustomButton(
           text: buttonText,
           onPressed: onPressed,
         ),
+        const SizedBox(height: 50),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(3, (index) => buildDot(index)),
+        ),
       ],
     );
   }
-}
 
+  Widget buildDot(int index) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      height: 10,
+      width: _currentPage == index ? 30 : 10,
+      decoration: BoxDecoration(
+        color: _currentPage == index ? Colors.black : Colors.grey,
+        borderRadius: BorderRadius.circular(5),
+      ),
+    );
+  }
+}
 
 
