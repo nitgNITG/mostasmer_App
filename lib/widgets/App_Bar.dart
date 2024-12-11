@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../screens/notifications/notifications.dart';
+
 class AppBar_com extends StatelessWidget {
   const AppBar_com({
     Key? key,
@@ -175,7 +177,9 @@ class AppBar_com extends StatelessWidget {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {},
+                    onTap: () async {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Notifications(),));
+                    },
                     child: Container(
                       width: 40.0,
                       height: 40.0,
