@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mostasmer/screens/Brands.dart';
+import 'package:mostasmer/screens/Brands/Brands.dart';
+import 'package:mostasmer/screens/Categories/Categories.dart';
 import 'package:mostasmer/widgets/App_Bar.dart';
 import 'package:mostasmer/widgets/Category_Card.dart';
 import 'package:mostasmer/widgets/brand_card.dart';
@@ -65,28 +66,33 @@ class HomePageScreen extends StatelessWidget {
                     ),
                     //Category List
                     const SizedBox(height: 15,),
-                    const Column(
+                    Column(
                       crossAxisAlignment:CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Category listing',style: TextStyle(
+                              const Text('Category listing',style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold
                               ),),
-                              Text('View all',style: TextStyle(
-                                  decoration:  TextDecoration.underline,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold
-                              ),),
+                              InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Categories(),));
+                                },
+                                child: const Text('View all',style: TextStyle(
+                                    decoration:  TextDecoration.underline,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                              ),
       
                             ],
                           ),
                         ),
-                        SingleChildScrollView(
+                        const SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
