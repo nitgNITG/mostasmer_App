@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:mostasmer/screens/OnBoarding/on_boarding.dart';
+import 'package:mostasmer/screens/ForgotPassword/forgot_password.dart';
+import 'package:mostasmer/screens/HomePage/Home_page_Screen.dart';
+import 'package:mostasmer/screens/SignUpScreen/signup_screen.dart';
 import 'package:mostasmer/widgets/App_Button.dart';
 import '../../widgets/Custom_BottomSheet.dart';
 import '../../widgets/Custom_TextField.dart';
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginScreen> {
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 15,),
-          
+
                 CustomTextField(
                   controller: _passwordController,
                   // labelText: 'Password'.tr(),
@@ -86,7 +88,12 @@ class _LoginPageState extends State<LoginScreen> {
                       onPressed: () {
                         print('Forgot Password');
                       },
-                      child: Text('Forgot Password?'.tr(), style: const TextStyle(color: Color(0xff2AB09C),decoration: TextDecoration.underline)),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
+
+                        },
+                          child: Text('Forgot Password?'.tr(), style: const TextStyle(color: Color(0xff2AB09C),decoration: TextDecoration.underline))),
                     ),
 
                   ],
@@ -119,6 +126,8 @@ class _LoginPageState extends State<LoginScreen> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+
                             print('Sign Up tapped');
                           },
                       ),
@@ -150,6 +159,7 @@ void showImageTextBottomSheet(BuildContext context) {
             const Text('You have 4 out of 5 attempts remaining.', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xffFF0000))),
             const SizedBox(height: 30),
             CustomButton(text: 'OK', onPressed: (){
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePageScreen()));
 
             })
           ],
