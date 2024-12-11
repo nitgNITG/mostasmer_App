@@ -6,6 +6,8 @@ import 'package:mostasmer/widgets/App_Bar.dart';
 import 'package:mostasmer/widgets/Category_Card.dart';
 import 'package:mostasmer/widgets/brand_card.dart';
 
+import '../Category Details/Category_Details.dart';
+
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
 
@@ -92,27 +94,32 @@ class HomePageScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SingleChildScrollView(
+                        SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 15),
-                                child: CategoryCard(image: 'assets/images/060eca3ba8d0af9b74efa7b588902ea2.gif',Name: 'Electronics',),
+                              InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryDetails(),));
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: CategoryCard(image: 'assets/images/060eca3ba8d0af9b74efa7b588902ea2.gif',Name: 'Electronics',),
+                                ),
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.only(left: 15),
                                 child: CategoryCard(image: 'assets/images/11f310ab5d3d29dc9f43e18a40f75732.gif',Name: 'Phones',),
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.only(left: 15),
                                 child: CategoryCard(image: 'assets/images/6ed7d2e96bce23ff1a699c699062a95d.gif',Name: 'Clothes',),
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.only(left: 15),
                                 child: CategoryCard(image: 'assets/images/d83ed32c125299c0aad6dce598e08a51.gif',Name: 'Bags',),
                               ),
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.only(left: 15),
                                 child: CategoryCard(image: 'assets/images/d19d3c2b4c72d83ddd9a4715b2f8b668.gif',Name: 'Shoes',),
                               ),

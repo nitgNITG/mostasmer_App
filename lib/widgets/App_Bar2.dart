@@ -56,17 +56,7 @@ class AppBar2 extends StatelessWidget {
               ),),
             ),
           ),
-           Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                  70.0, 10.0, 0.0, 10.0),
-              child: Text("clear all",style: TextStyle(
-                decoration: TextDecoration.underline,
-                color:HexColor('#2AB09C'),
-              ),),
-            ),
-          ),
+
         ],
       ),
     );
